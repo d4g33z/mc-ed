@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blockly Workspace Editor</title>
+    <script src="../node_modules/blockly/blockly.min.js"></script>
+<!--    <script src="../node_modules/blockly/blockly_compressed.js"></script>-->
+    <script src="../node_modules/blockly/blocks_compressed.js"></script>
+    <script src="../node_modules/blockly/python_compressed.js"></script>
+</head>
+
+<body>
+    <div id="blocklyDiv" style="height: 800px; width: 100%;"></div>
+
+    <xml id="toolbox" style="display: none">
+        <category name="Craft" colour="#81c23c">
+            <block type="minecraft_create_column">
+                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>
+                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>
+                <value name="WIDTH"><shadow type="math_number"><field name="NUM">3</field></shadow></value>
+                <value name="HEIGHT"><shadow type="math_number"><field name="NUM">3</field></shadow></value>
+            </block>
+<!--            <block type="minecraft_create_shape">-->
+<!--                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>-->
+<!--                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>-->
+<!--                <value name="SIZE"><shadow type="math_number"><field name="NUM">3</field></shadow></value>-->
+<!--                <value name="RADIUS"><shadow type="math_number"><field name="NUM">3</field></shadow></value>-->
+<!--                <value name="BASE"><shadow type="math_number"><field name="NUM">3</field></shadow></value>-->
+<!--            </block>-->
+<!--            <block type="minecraft_create_plane">-->
+<!--                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>-->
+<!--                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>-->
+<!--                <value name="WIDTH"><shadow type="math_number"><field name="NUM">3</field></shadow></value>-->
+<!--                <value name="HEIGHT"><shadow type="math_number"><field name="NUM">3</field></shadow></value>-->
+<!--            </block>-->
+<!--            <block type="minecraft_set_block">-->
+<!--                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>-->
+<!--                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>-->
+<!--            </block>-->
+<!--            <block type="minecraft_set_blocks">-->
+<!--                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>-->
+<!--                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>-->
+<!--            </block>-->
+<!--            <block type="minecraft_set_floor">-->
+<!--                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>-->
+<!--                <value name="SIZE"><shadow type="math_number"><field name="NUM">3</field></shadow></value>-->
+<!--            </block>-->
+<!--            <block type="minecraft_create_door">-->
+<!--                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>-->
+            </block>
+        </category>
+        <category name="Custom Python Blocks" color="160">
+            <block type="greeting"></block>
+        </category>
+        <category name="Built-in Python Blocks">
+            <block type="variables_get"></block>
+            <block type="variables_set"></block>
+            <block type="text"></block>
+            <block type="math_number"></block>
+            <block type="math_arithmetic"></block>
+            <block type="controls_if"></block>
+            <block type="logic_compare"></block>
+            <block type="controls_repeat_ext"></block>
+            <block type="text_print"></block>
+        </category>
+    </xml>
+
+
+    <script type="module">
+        console.log('hello')
+        import { defineGreetingBlock } from './blocks/greeting.mjs'; // Import defineGreetingBlock
+        import { defineGreetingPython } from './generators/python/greeting.mjs'; // Import defineGreetingPython
+        import { defineMineCraftBlocks } from "./blocks/mc.mjs";
+        import { defineMineCraftConstants } from "./lib/constants.mjs";
+        import { defineMineCraftShadowBlocks } from "./lib/shadows.mjs";
+
+
+        defineGreetingBlock(Blockly)
+        defineGreetingPython(Blockly)
+
+        defineMineCraftShadowBlocks(Blockly);
+        defineMineCraftBlocks(Blockly)
+        defineMineCraftConstants(Blockly);
+
+
+        var workspace = Blockly.inject('blocklyDiv', {
+            toolbox: document.getElementById('toolbox')
+        });
+
+       window.saveWorkspaceToJson = function () {
+            // 1. Serialize workspace to JSON object
+            const workspaceJson = Blockly.serialization.workspaces.save(workspace);
+
+            // 2. Convert JSON object to a JSON string
+            const jsonText = JSON.stringify(workspaceJson, null, 2); // Use null, 2 for pretty printing
+
+            // 3. Create a download link for the JSON file
+            const filename = 'workspace.json'; // Updated filename extension
+
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(jsonText)); // Updated MIME type
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        }
+
+        window.generatePythonCode = function () {
+            var pythonCode = python.pythonGenerator.workspaceToCode(workspace);
+            document.getElementById('pythonCodeDisplay').value = pythonCode; // Set textarea value
+        }
+
+        async function executeIPythonCommand(command, commandArguments) {
+            const apiEndpoint = 'http://localhost:5000/ipython_magic'; // API server URL
+            const requestData = { command: command, arguments: commandArguments };
+
+            try {
+                const response = await fetch(apiEndpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestData)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (data.error) {
+                    console.error("IPython Magic Error:", data.error);
+                    alert(`IPython Command Error: ${data.error}`); // Or better error handling in UI
+                    return null;
+                } else {
+                    console.log("IPython Magic Output:", data.output);
+                    return data.output; // Process and display the output in your editor
+                }
+
+            } catch (error) {
+                console.error("Fetch error calling IPython API:", error);
+                alert("Error communicating with IPython process."); // User-friendly error
+                return null;
+            }
+        }
+
+        // Example of calling this function when a button is clicked or a Blockly event occurs:
+        window.callPythonFromBlockly = async function() { // Example - make it global for button onClick
+            console.log("Inside callPythonFromBlockly")
+            const commandToExecute = '%ls'; // Example magic command - list files
+            const commandArgs = '-l . ';   // Example arguments
+            const output = await executeIPythonCommand(commandToExecute, commandArgs);
+            // if (output) {
+            //     document.getElementById('pythonCodeDisplay').value = "IPython Output:\n" + output; // Display output
+            // }
+        };
+
+        window.createPythonScript = async function() { // Example - make it global for button onClick
+            console.log("Inside executePythonCode")
+            generatePythonCode() // generate what is visible in text area
+            const commandToExecute = '%mc_create_script'; // Example magic command - list files
+            const commandArgs = document.getElementById('pythonCodeDisplay').value ;   // Example arguments
+            const output = await executeIPythonCommand(commandToExecute, commandArgs);
+            // if (output) {
+            //     document.getElementById('pythonCodeDisplay').value = "IPython Output:\n" + output; // Display output
+            // }
+        };
+
+    </script>
+
+    <textarea id="pythonCodeDisplay" rows="10" cols="80"
+              style="width: 100%; display: block; margin-bottom: 10px;"></textarea>
+    <br/>
+
+    <button onClick="saveWorkspaceToJson()">Save Workspace to JSON</button>
+    <button onClick="generatePythonCode()">Generate Python Code</button>
+    <button onClick="createPythonScript()">Create Python Script</button>
+
+</body>
+</html>
