@@ -1,4 +1,5 @@
 export function defineMineCraftShadowBlocks(Blockly) {
+
     Blockly.Xml.textToDom = function (e) {
         return (e = (new DOMParser).parseFromString(e, "text/xml")) && e.firstChild && "xml" == e.firstChild.nodeName.toLowerCase() && e.firstChild === e.lastChild
     }
@@ -33,7 +34,7 @@ export function defineMineCraftShadowBlocks(Blockly) {
             // Placeholder - returns a simple 3D vector shadow block XML string.
             return '<shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow>';
         }, getStepperShadow: function (defaultValue) {
-            return `<shadow type="math_number"><field name="NUM">${defaultValue}</field></shadow>`;
+            return `<shadow type="math_number"><field name="NUM">0</field></shadow>`;
 
         }
     }

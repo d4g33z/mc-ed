@@ -1,22 +1,18 @@
 {
   "name": "mc-ed",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/editor.mjs",
+  "description": "Minecraft Blockly Editor",
+  "source": "src/editor.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/cli.mjs",
-    "cli": "node src/cli.mjs",
-    "electron-start": "electron electron-main.js"
+    "start": "parcel",
+    "build": "parcel build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "blockly": "",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "electron": "^34.2.0"
+    "electron": "^34.2.0",
+    "parcel": "^2.13.3"
   }
 }
