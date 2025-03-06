@@ -1,109 +1,98 @@
-/**
- * Class for a colour input field.
- * @param {string} colour The initial colour in '#rrggbb' format.
- * @param {Function=} opt_validator A function that is executed when a new
- *     colour is selected.
- * @extends {Blockly.Field}
- * @constructor
- */
+// src/lib/utils.mjs
+
+// Define MCED *outside* the function, at the top level of the module.
+export const MCED = {  // Export directly
+    BlocklyUtils: {
+        configureShadow: function(block, inputName) {
+            let shadowValue = MCED.Defaults.values[block.type]?.[inputName]?.shadow;
+            if (shadowValue) {
+                block.getInput(inputName).connection.setShadowDom(Blockly.Xml.textToDom(shadowValue));
+            }
+        },
+        get3dPickerShadow: () => '<shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow>',
+        getStepperShadow: (defaultValue) => `<shadow type="math_number"><field name="NUM">${defaultValue}</field></shadow>`,
+    },
+    Defaults : {values:{}}
+};
 
 export function defineMineCraftBlocklyUtils(Blockly) {
 
-    Blockly.FieldColour = function (colour, opt_validator) {
-        Blockly.FieldColour.superClass_.constructor.call(this, colour, opt_validator);
-        this.addArgType('colour'); // Good practice for argument type checking
-    };
-
-// Use Blockly.utils.object.mixin for inheritance
-    Blockly.utils.object.mixin(Blockly.FieldColour.prototype, Blockly.Field.prototype);
-    Blockly.FieldColour.prototype.constructor = Blockly.FieldColour;
-
     /**
-     * Mouse cursor style when over the hotspot that initiates the editor.
+     * Class for a colour input field.
      */
-    Blockly.FieldColour.prototype.CURSOR = 'default';
-
-    /**
-     * Install this field on a block.
-     */
-    Blockly.FieldColour.prototype.initView = function () {
-        this.createBorderRect_();
-        this.borderRect_.style['fillOpacity'] = '1';
-        this.setValue(this.getValue()); // Ensure initial value is displayed
-    };
-
-    /**
-     * Create a palette under the colour field.  (Placeholder - No actual picker)
-     * @private
-     */
-    Blockly.FieldColour.prototype.createWidget_ = function () {
-        var widgetContainer = document.createElement('div');
-        return widgetContainer;
-    };
-
-    /**
-     * Close the colour picker if this input is being deleted.
-     */
-    Blockly.FieldColour.prototype.dispose = function () {
-        Blockly.WidgetDiv.hideIfOwner(this);
-        Blockly.FieldColour.superClass_.dispose.call(this);
-    };
-
-    /**
-     * Return the current colour.
-     * @return {string} Current colour in '#rrggbb' format.
-     */
-    Blockly.FieldColour.prototype.getValue = function () {
-        return this.colour_;
-    };
-
-    /**
-     * Set the colour.
-     * @param {string} colour The new colour in '#rrggbb' format.
-     */
-    Blockly.FieldColour.prototype.setValue = function (colour) {
-        if (this.sourceBlock_ && this.sourceBlock_.rendered && this.sourceBlock_.workspace && this.sourceBlock_.workspace.options.readOnly) {
-            return;
+    console.log("utils.mjs: inside defineMineCraftBlocks")
+    Blockly.FieldColour = class extends Blockly.Field {
+        static fromJson(options) {
+            return new Blockly.FieldColour(options.colour, null);
         }
-        if (this.colour_ === colour) {
-            return;
+        constructor(colour, opt_validator) {
+            super(colour, opt_validator);
+            this.addArgType('colour');
+            this.colour_ = '#000000'; // Set a default value
         }
-        if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
-            Blockly.Events.fire(new Blockly.Events.Change(this.sourceBlock_, 'field', this.name, this.colour_, colour));
+        initView() {
+            this.createBorderRect_();
+            this.borderRect_.style['fillOpacity'] = '1';
+            this.setValue(this.getValue());
         }
-        this.colour_ = colour;
-        if (this.borderRect_) {
-            this.borderRect_.style.fill = colour || '#000'; // Handle null/undefined
+        createWidget_() {
+            return document.createElement('div'); // Placeholder
+        }
+        dispose() {
+            Blockly.WidgetDiv.hideIfOwner(this);
+            super.dispose();
+        }
+        getValue() {
+            return this.colour_;
+        }
+
+        setValue(colour) {
+            if (this.sourceBlock_ && this.sourceBlock_.rendered && this.sourceBlock_.workspace &&
+                this.sourceBlock_.workspace.options.readOnly) {
+                return;
+            }
+            if (this.colour_ === colour) {
+                return;
+            }
+            if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
+                Blockly.Events.fire(new Blockly.Events.BlockChange(
+                    this.sourceBlock_, 'field', this.name, this.colour_, colour));
+            }
+            this.colour_ = colour;
+            if (this.borderRect_) {
+                this.borderRect_.style.fill = colour || '#000';
+            }
+        }
+
+        getText() {
+            return this.getValue();
+        }
+
+        setColours(colours) {
+            return this;
+        }
+        setColumns(columns) {
+            return this;
         }
     };
 
-    /**
-     * Get the text from this field.
-     * @return {string} Current text.
-     */
-    Blockly.FieldColour.prototype.getText = function () {
-        return this.getValue();
-    };
 
-// The following two methods are *required* to be present.  Even though
-// they don't *do* anything in this simple example, they are expected by
-// Blockly's internal mixins.  If you omit them, you'll likely get errors.
+    console.log(Blockly.Field.register)
+    // Blockly.Field.register('field_colour', Blockly.FieldColour);
+    Blockly.fieldRegistry.register('field_colour', Blockly.FieldColour);
 
-    /**
-     * Set the colours for this field.
-     * @param {?Array.<string>} colours Array of colours, or null to use default.
-     * @return {!Blockly.FieldColour} Returns itself (for method chaining).
-     */
-    Blockly.FieldColour.prototype.setColours = function (colours) {
-        return this; // For chaining
-    };
+    // Define FieldAxis *within* defineMineCraftBlocklyUtils, after FieldColour
+    class FieldAxis extends Blockly.FieldDropdown {
+        constructor(value, opt_validator) {
+            const options = [['x', 'x'], ['y', 'y'], ['z', 'z']]; // Correct options
+            super(options, opt_validator); // Call super with options
+            this.setValue(value);
+        }
 
-    /**
-     * Set the number of columns.
-     * @param {number} columns Number of columns.
-     * @return {!Blockly.FieldColour} Returns itself (for method chaining).
-     */
-    Blockly.FieldColour.prototype.setColumns = function (columns) {
-        return this; // For chaining
-    };
+        static fromJson(options) {
+            return new FieldAxis(options.value, options.validator);
+        }
+    }
+    // Blockly.Field.register('field_axis', FieldAxis);
+    Blockly.fieldRegistry.register('field_axis', FieldAxis);
 }

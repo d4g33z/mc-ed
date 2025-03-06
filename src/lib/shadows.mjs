@@ -48,7 +48,7 @@ export function defineMineCraftShadowBlocks(Blockly,MCED) {
     MCED.Defaults.values.minecraft_create_door = {
         POSITION: {
             default: '{"x":0,"y":0,"z":0}',
-            shadow: Blockly.BlocklyUtils.get3dPickerShadow()
+            shadow: MCED.BlocklyUtils.get3dPickerShadow()
         }, FACING: {default: "NORTH"}
     };
 

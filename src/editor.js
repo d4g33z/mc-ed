@@ -1,28 +1,42 @@
-import * as Blockly from 'blockly';
+import * as Blockly from 'blockly'; // import all of blockly
+
+console.log(Blockly)
 console.log('hello')
 
 // import { defineGreetingBlock } from './blocks/greeting.mjs'; // Import defineGreetingBlock
 // import { defineGreetingPython } from './generators/python/greeting.mjs'; // Import defineGreetingPython
+
 import {defineMineCraftBlocks} from "./blocks/mc.mjs";
 import {defineMineCraftConstants} from "./lib/constants.mjs";
-import {defineMineCraftShadowBlocks} from "./lib/shadows.mjs";
 import {defineMineCraftBlocklyUtils} from "./lib/utils.mjs";
+import {MCED} from "./lib/utils.mjs"
 
 
 // defineGreetingBlock(Blockly)
 // defineGreetingPython(Blockly)
 async function init() {
-    console.log(Blockly.utils.object.mixin)
 
-    var MCED = {};
-
-    defineMineCraftBlocklyUtils(Blockly)
-    defineMineCraftShadowBlocks(Blockly,MCED);
+    defineMineCraftBlocklyUtils(Blockly);
     defineMineCraftBlocks(Blockly)
     defineMineCraftConstants(Blockly);
 
+
     var workspace = Blockly.inject('blocklyDiv', {
-        toolbox: document.getElementById('toolbox')
+        toolbox: document.getElementById('toolbox'),
+        grid: {
+            spacing: 20,
+            length: 3,
+            colour: '#ccc',
+            snap: true
+        },
+        zoom: {
+            controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 3,
+            minScale: 0.3,
+            scaleSpeed: 1.2
+        }
     });
 
     window.saveWorkspaceToJson = function () {
