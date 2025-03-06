@@ -35,6 +35,8 @@ export function defineMineCraftConstants(Blockly) {
         MINECRAFT_PRIMITIVE_SIZE: 'size',
         MINECRAFT_PRIMITIVE_RADIUS: 'radius',
         MINECRAFT_PRIMITIVE_BASE: 'base',
+        MINECRAFT_VECTOR_DELTA: 'vector delta',
+        MINECRAFT_VECTOR: 'vector'
     };
 
     // Add Blockly.ALIGN_RIGHT

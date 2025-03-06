@@ -1,12 +1,12 @@
 console.log("mc.mjs: Start of file execution");
 
-import { MCED } from "../lib/utils.mjs"; //Importing here!
+import {MCED} from "../lib/utils.mjs"; //Importing here!
 
 export function defineMineCraftBlocks(Blockly) {
     console.log("mc.mjs: Inside defineMineCraftBlocks")
 
     Blockly.Blocks['dummy_block'] = {
-        init: function() {
+        init: function () {
             console.log("mc.mjs: Inside init() function of ...");
         }
 
@@ -15,24 +15,24 @@ export function defineMineCraftBlocks(Blockly) {
     // --- Position Category ---
 
     Blockly.Blocks['minecraft_vector_3d'] = {
-      init: function() {
-          if (this.isInFlyout) {
-              this.appendDummyInput()
-                  .appendField(Blockly.Msg.MINECRAFT_VECTOR);
-              this.setOutput(true, "3DVector");
-              this.setColour(160);
-          } else {
-              this.appendDummyInput()
-                  .appendField("x:")
-                  .appendField(new Blockly.FieldTextInput("0"), "X")
-                  .appendField("y:")
-                  .appendField(new Blockly.FieldTextInput("0"), "Y")
-                  .appendField("z:")
-                  .appendField(new Blockly.FieldTextInput("0"), "Z");
-              this.setOutput(true, "3DVector");
-              this.setColour(160);
-          }
-      }
+        init: function () {
+            if (this.isInFlyout) {
+                this.appendDummyInput()
+                    .appendField(Blockly.Msg.MINECRAFT_VECTOR);
+                this.setOutput(true, "3DVector");
+                this.setColour(160);
+            } else {
+                this.appendDummyInput()
+                    .appendField("x:")
+                    .appendField(new Blockly.FieldTextInput("0"), "X")
+                    .appendField("y:")
+                    .appendField(new Blockly.FieldTextInput("0"), "Y")
+                    .appendField("z:")
+                    .appendField(new Blockly.FieldTextInput("0"), "Z");
+                this.setOutput(true, "3DVector");
+                this.setColour(160);
+            }
+        }
     };
 
     Blockly.Blocks['minecraft_vector_delta'] = {
@@ -110,7 +110,7 @@ export function defineMineCraftBlocks(Blockly) {
 
     // --- Craft Category ---
     Blockly.Blocks['minecraft_create_column'] = {
-        init: function() {
+        init: function () {
             this.setInputsInline(true);
             this.setNextStatement(true);
             this.setPreviousStatement(true);
@@ -120,40 +120,40 @@ export function defineMineCraftBlocks(Blockly) {
             //     this.appendDummyInput()
             //         .appendField(Blockly.Msg.MINECRAFT_COLUMN);
             // } else {
-                this.appendValueInput("POSITION")
-                    .setCheck("3DVector")
-                    .appendField(Blockly.Msg.MINECRAFT_COLUMN)
-                    .setAlign(Blockly.ALIGN_RIGHT);
-                this.appendValueInput("WIDTH")
-                    .setCheck("Number")
-                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_WIDTH)
-                    .setAlign(Blockly.ALIGN_RIGHT);
-                this.appendValueInput("HEIGHT")
-                    .setCheck("Number")
-                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_HEIGHT)
-                    .setAlign(Blockly.ALIGN_RIGHT);
-                this.appendValueInput("TYPE")
-                    .setCheck("Block")
-                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_TYPE)
-                    .setAlign(Blockly.ALIGN_RIGHT);
-                this.appendDummyInput()
-                    .appendField(new Blockly.FieldAxis("y", ["y", "x", "z"]), "AXIS")
-                    .setAlign(Blockly.ALIGN_RIGHT);
-                this.appendDummyInput()
-                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_FILLED)
-                    .appendField(new Blockly.FieldCheckbox("FALSE"), "FILLED")
-                    .setAlign(Blockly.ALIGN_RIGHT);
+            this.appendValueInput("POSITION")
+                .setCheck("3DVector")
+                .appendField(Blockly.Msg.MINECRAFT_COLUMN)
+                .setAlign(Blockly.ALIGN_RIGHT);
+            this.appendValueInput("WIDTH")
+                .setCheck("Number")
+                .appendField(Blockly.Msg.MINECRAFT_COLUMN_WIDTH)
+                .setAlign(Blockly.ALIGN_RIGHT);
+            this.appendValueInput("HEIGHT")
+                .setCheck("Number")
+                .appendField(Blockly.Msg.MINECRAFT_COLUMN_HEIGHT)
+                .setAlign(Blockly.ALIGN_RIGHT);
+            this.appendValueInput("TYPE")
+                .setCheck("Block")
+                .appendField(Blockly.Msg.MINECRAFT_COLUMN_TYPE)
+                .setAlign(Blockly.ALIGN_RIGHT);
+            this.appendDummyInput()
+                .appendField(new Blockly.FieldAxis("y", ["y", "x", "z"]), "AXIS")
+                .setAlign(Blockly.ALIGN_RIGHT);
+            this.appendDummyInput()
+                .appendField(Blockly.Msg.MINECRAFT_COLUMN_FILLED)
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "FILLED")
+                .setAlign(Blockly.ALIGN_RIGHT);
 
-                MCED.BlocklyUtils.configureShadow(this, "POSITION");
-                MCED.BlocklyUtils.configureShadow(this, "WIDTH");
-                MCED.BlocklyUtils.configureShadow(this, "HEIGHT");
-                MCED.BlocklyUtils.configureShadow(this, "TYPE");
+            MCED.BlocklyUtils.configureShadow(this, "POSITION");
+            MCED.BlocklyUtils.configureShadow(this, "WIDTH");
+            MCED.BlocklyUtils.configureShadow(this, "HEIGHT");
+            MCED.BlocklyUtils.configureShadow(this, "TYPE");
             // }
         }
     };
 
     Blockly.Blocks['minecraft_create_plane'] = {
-        init: function() {
+        init: function () {
             this.setInputsInline(true);
             this.setNextStatement(true);
             this.setPreviousStatement(true);
@@ -192,6 +192,19 @@ export function defineMineCraftBlocks(Blockly) {
     };
 
     // --- Blocks Category ---
+    Blockly.Blocks['minecraft_block'] = {
+        // Define properties and methods specific to 'minecraft_block'.
+        // For example:
+        init: function () {
+            // Initialize the block's fields, inputs, outputs, etc.
+            this.appendDummyInput()
+                .appendField("Minecraft Block");
+            this.setPreviousStatement(true, null);
+            this.setNextStatement(true, null);
+            this.setOutput(true, "Block");
+            this.setColour(230);
+        }, // Additional properties or methods can be added here.
+    };
 
     Blockly.Blocks['minecraft_block_world'] = {
         init: function () {
