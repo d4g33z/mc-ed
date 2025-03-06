@@ -116,39 +116,39 @@ export function defineMineCraftBlocks(Blockly) {
             this.setPreviousStatement(true);
             this.setColour("#81c23c");
 
-            // if (this.isInFlyout) {
-            //     this.appendDummyInput()
-            //         .appendField(Blockly.Msg.MINECRAFT_COLUMN);
-            // } else {
-            this.appendValueInput("POSITION")
-                .setCheck("3DVector")
-                .appendField(Blockly.Msg.MINECRAFT_COLUMN)
-                .setAlign(Blockly.ALIGN_RIGHT);
-            this.appendValueInput("WIDTH")
-                .setCheck("Number")
-                .appendField(Blockly.Msg.MINECRAFT_COLUMN_WIDTH)
-                .setAlign(Blockly.ALIGN_RIGHT);
-            this.appendValueInput("HEIGHT")
-                .setCheck("Number")
-                .appendField(Blockly.Msg.MINECRAFT_COLUMN_HEIGHT)
-                .setAlign(Blockly.ALIGN_RIGHT);
-            this.appendValueInput("TYPE")
-                .setCheck("Block")
-                .appendField(Blockly.Msg.MINECRAFT_COLUMN_TYPE)
-                .setAlign(Blockly.ALIGN_RIGHT);
-            this.appendDummyInput()
-                .appendField(new Blockly.FieldAxis("y", ["y", "x", "z"]), "AXIS")
-                .setAlign(Blockly.ALIGN_RIGHT);
-            this.appendDummyInput()
-                .appendField(Blockly.Msg.MINECRAFT_COLUMN_FILLED)
-                .appendField(new Blockly.FieldCheckbox("FALSE"), "FILLED")
-                .setAlign(Blockly.ALIGN_RIGHT);
+            if (this.isInFlyout) {
+                this.appendDummyInput()
+                    .appendField(Blockly.Msg.MINECRAFT_COLUMN);
+            } else {
+                this.appendValueInput("POSITION")
+                    .setCheck("3DVector")
+                    .appendField(Blockly.Msg.MINECRAFT_COLUMN)
+                    .setAlign(Blockly.ALIGN_RIGHT);
+                this.appendValueInput("WIDTH")
+                    .setCheck("Number")
+                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_WIDTH)
+                    .setAlign(Blockly.ALIGN_RIGHT);
+                this.appendValueInput("HEIGHT")
+                    .setCheck("Number")
+                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_HEIGHT)
+                    .setAlign(Blockly.ALIGN_RIGHT);
+                this.appendValueInput("TYPE")
+                    .setCheck("Block")
+                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_TYPE)
+                    .setAlign(Blockly.ALIGN_RIGHT);
+                this.appendDummyInput()
+                    .appendField(new Blockly.FieldAxis("y", ["y", "x", "z"]), "AXIS")
+                    .setAlign(Blockly.ALIGN_RIGHT);
+                this.appendDummyInput()
+                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_FILLED)
+                    .appendField(new Blockly.FieldCheckbox("FALSE"), "FILLED")
+                    .setAlign(Blockly.ALIGN_RIGHT);
 
-            MCED.BlocklyUtils.configureShadow(this, "POSITION");
-            MCED.BlocklyUtils.configureShadow(this, "WIDTH");
-            MCED.BlocklyUtils.configureShadow(this, "HEIGHT");
-            MCED.BlocklyUtils.configureShadow(this, "TYPE");
-            // }
+                MCED.BlocklyUtils.configureShadow(this, "POSITION");
+                MCED.BlocklyUtils.configureShadow(this, "WIDTH");
+                MCED.BlocklyUtils.configureShadow(this, "HEIGHT");
+                MCED.BlocklyUtils.configureShadow(this, "TYPE");
+            }
         }
     };
 
@@ -189,6 +189,134 @@ export function defineMineCraftBlocks(Blockly) {
                 MCED.BlocklyUtils.configureShadow(this, "TYPE");
             }
         }
+    };
+    Blockly.Blocks['minecraft_create_shape'] = {
+        init: function () {
+            const shapeOptions = [[Blockly.Msg.MINECRAFT_SHAPE_CUBE, "CUBE"], [Blockly.Msg.MINECRAFT_SHAPE_SPHERE, "SPHERE"], [Blockly.Msg.MINECRAFT_SHAPE_PYRAMID, "PYRAMID"]];
+
+            this.appendDummyInput()
+                .appendField(Blockly.Msg.MINECRAFT_CREATE_SHAPE);
+
+            this.appendDummyInput("SHAPE_INPUT") // Use a consistent name
+                .appendField(new Blockly.FieldDropdown(shapeOptions, this._onShapeChange.bind(this)), "SHAPE");
+
+
+            this.setInputsInline(false);
+            this.setNextStatement(true);
+            this.setPreviousStatement(true);
+            this.setColour("#81c23c");
+            this._updateShape("CUBE"); // Initialize
+        },
+
+        mutationToDom: function () {
+            const container = document.createElement('mutation');
+            const shape = this.getFieldValue('SHAPE'); // Get the FIELD value.
+            container.setAttribute('shape', shape);
+            return container;
+        },
+
+        domToMutation: function (xmlElement) {
+            const shape = xmlElement.getAttribute('shape') || 'CUBE';
+            this._updateShape(shape); //Initializes the shape based on the saved state.
+            this.setFieldValue(shape, 'SHAPE'); // VERY important: Update the field value.
+        }, _onShapeChange: function (newShape) {
+            if (newShape !== this._previousShape) { // Prevent infinite loops
+                this._updateShape(newShape);
+            }
+            return newShape;
+        }, _updateShape: function (shape) {
+            // 1. Disconnect and store existing connections.
+            const connections = {};
+            const inputNames = ['SIZE', 'RADIUS', 'BASE', 'TYPE', 'POSITION', "FILLED"]; // Include *all* possible inputs.
+            for (const inputName of inputNames) {
+                const input = this.getInput(inputName);
+                if (input && input.connection && input.connection.targetConnection) {
+                    connections[inputName] = input.connection.targetConnection;
+                    input.connection.disconnect(); // Clean disconnect.
+                }
+            }
+
+            // 2. Remove old inputs.
+            this._cleanPreviousShape();
+
+
+            // 3. Add shape-specific inputs, position and type/filled inputs.
+            this._addPositionInput();
+            switch (shape) {
+                case 'CUBE':
+                    this._addCubeInputs();
+                    break;
+                case 'SPHERE':
+                    this._addSphereInputs();
+                    break;
+                case 'PYRAMID':
+                    this._addPyramidInputs();
+                    break;
+            }
+            this._addTypeAndFilledInputs();
+
+            // 4. Reconnect blocks.
+            for (const inputName of inputNames) {
+                if (connections[inputName] && this.getInput(inputName)) {
+                    this.getInput(inputName).connection.connect(connections[inputName]);
+                }
+            }
+            this._previousShape = shape;
+
+        },
+
+        _addCubeInputs: function () {
+            this.appendValueInput("SIZE")
+                .setCheck("Number")
+                .appendField(Blockly.Msg.MINECRAFT_PRIMITIVE_SIZE)
+                .setAlign(Blockly.ALIGN_RIGHT);
+            MCED.BlocklyUtils.configureShadow(this, "SIZE");
+
+        },
+
+        _addSphereInputs: function () {
+            this.appendValueInput("RADIUS")
+                .setCheck("Number")
+                .appendField(Blockly.Msg.MINECRAFT_PRIMITIVE_RADIUS)
+                .setAlign(Blockly.ALIGN_RIGHT);
+            MCED.BlocklyUtils.configureShadow(this, "RADIUS");
+        },
+
+        _addPyramidInputs: function () {
+            this.appendValueInput("BASE")
+                .setCheck("Number")
+                .appendField(Blockly.Msg.MINECRAFT_PRIMITIVE_BASE)
+                .setAlign(Blockly.ALIGN_RIGHT);
+            MCED.BlocklyUtils.configureShadow(this, "BASE");
+        },
+
+        _addTypeAndFilledInputs: function () {
+            this.appendValueInput("TYPE")
+                .setCheck("Block")
+                .appendField(Blockly.Msg.MINECRAFT_PRIMITIVE_TYPE)
+                .setAlign(Blockly.ALIGN_RIGHT);
+            MCED.BlocklyUtils.configureShadow(this, "TYPE");
+            this.appendDummyInput("FILLED")
+                .appendField(Blockly.Msg.MINECRAFT_COLUMN_FILLED)
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "FILLED")
+                .setAlign(Blockly.ALIGN_RIGHT);
+        },
+
+        _addPositionInput: function () {
+            this.appendValueInput("POSITION")
+                .setCheck("3DVector")
+                .appendField(Blockly.Msg.MINECRAFT_CREATE_SHAPE_POSITION)
+                .setAlign(Blockly.ALIGN_RIGHT);
+            MCED.BlocklyUtils.configureShadow(this, "POSITION");
+        }, _cleanPreviousShape: function () {
+
+            const inputs = ['SIZE', 'RADIUS', 'BASE', 'TYPE', 'FILLED', "POSITION"]; // Include *all* possible inputs.
+            for (const inputName of inputs) {
+                if (this.getInput(inputName)) {
+                    this.removeInput(inputName);
+                }
+            }
+        },
     };
 
     // --- Blocks Category ---
