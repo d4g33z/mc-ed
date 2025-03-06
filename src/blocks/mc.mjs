@@ -1,5 +1,5 @@
 console.log("mc.mjs: Start of file execution");
-export function defineMineCraftBlocks(Blockly) {
+export function defineMineCraftBlocks(Blockly,MCED) {
     console.log("mc.mjs: Inside defineMineCraftBlocks")
 
     Blockly.Blocks['dummy_block'] = {
@@ -101,7 +101,7 @@ export function defineMineCraftBlocks(Blockly) {
             this.setNextStatement(true);
             this.setColour(160);
             //Shadow configuration
-            Blockly.BlocklyUtils.configureShadow(this, "TARGET");
+            MCED.BlocklyUtils.configureShadow(this, "TARGET");
         }
     };
 
@@ -141,10 +141,10 @@ export function defineMineCraftBlocks(Blockly) {
                     .appendField(new Blockly.FieldCheckbox("FALSE"), "FILLED")
                     .setAlign(Blockly.ALIGN_RIGHT);
 
-                Blockly.BlocklyUtils.configureShadow(this, "POSITION");
-                Blockly.BlocklyUtils.configureShadow(this, "WIDTH");
-                Blockly.BlocklyUtils.configureShadow(this, "HEIGHT");
-                Blockly.BlocklyUtils.configureShadow(this, "TYPE");
+                MCED.BlocklyUtils.configureShadow(this, "POSITION");
+                MCED.BlocklyUtils.configureShadow(this, "WIDTH");
+                MCED.BlocklyUtils.configureShadow(this, "HEIGHT");
+                MCED.BlocklyUtils.configureShadow(this, "TYPE");
             // }
         }
     };
@@ -180,10 +180,10 @@ export function defineMineCraftBlocks(Blockly) {
                     .appendField(new Blockly.FieldAxis("y", ["y", "x", "z"]), "AXIS")
                     .setAlign(Blockly.ALIGN_RIGHT);
 
-                Blockly.BlocklyUtils.configureShadow(this, "POSITION");
-                Blockly.BlocklyUtils.configureShadow(this, "WIDTH");
-                Blockly.BlocklyUtils.configureShadow(this, "HEIGHT");
-                Blockly.BlocklyUtils.configureShadow(this, "TYPE");
+                MCED.BlocklyUtils.configureShadow(this, "POSITION");
+                MCED.BlocklyUtils.configureShadow(this, "WIDTH");
+                MCED.BlocklyUtils.configureShadow(this, "HEIGHT");
+                MCED.BlocklyUtils.configureShadow(this, "TYPE");
             }
         }
     };

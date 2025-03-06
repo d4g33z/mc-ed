@@ -1,5 +1,4 @@
 import * as Blockly from 'blockly';
-// import * as Blockly from '../node_modules/blockly/core';
 console.log('hello')
 
 // import { defineGreetingBlock } from './blocks/greeting.mjs'; // Import defineGreetingBlock
@@ -14,8 +13,11 @@ import {defineMineCraftBlocklyUtils} from "./lib/utils.mjs";
 // defineGreetingPython(Blockly)
 async function init() {
     console.log(Blockly.utils.object.mixin)
+
+    var MCED = {};
+
     defineMineCraftBlocklyUtils(Blockly)
-    defineMineCraftShadowBlocks(Blockly);
+    defineMineCraftShadowBlocks(Blockly,MCED);
     defineMineCraftBlocks(Blockly)
     defineMineCraftConstants(Blockly);
 
