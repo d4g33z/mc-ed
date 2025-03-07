@@ -6,9 +6,11 @@ console.log('hello')
 // import { defineGreetingBlock } from './blocks/greeting.mjs'; // Import defineGreetingBlock
 // import { defineGreetingPython } from './generators/python/greeting.mjs'; // Import defineGreetingPython
 
-import {defineMineCraftBlocks} from "./blocks/mc.mjs";
 import {defineMineCraftConstants} from "./lib/constants.mjs";
 import {defineMineCraftBlocklyUtils} from "./lib/utils.mjs";
+import {defineMineCraftBlocks} from "./blocks/mc.mjs";
+import {defineMathBlocks} from "./blocks/math.mjs";
+
 import {MCED} from "./lib/utils.mjs"
 
 
@@ -16,9 +18,10 @@ import {MCED} from "./lib/utils.mjs"
 // defineGreetingPython(Blockly)
 async function init() {
 
+    defineMineCraftConstants(Blockly);
     defineMineCraftBlocklyUtils(Blockly);
     defineMineCraftBlocks(Blockly)
-    defineMineCraftConstants(Blockly);
+    defineMathBlocks(Blockly);
 
 
     var workspace = Blockly.inject('blocklyDiv', {

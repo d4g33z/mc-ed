@@ -196,9 +196,10 @@ export function defineMineCraftBlocks(Blockly) {
 
             this.appendDummyInput()
                 .appendField(Blockly.Msg.MINECRAFT_CREATE_SHAPE);
-
+            //
             this.appendDummyInput("SHAPE_INPUT") // Use a consistent name
                 .appendField(new Blockly.FieldDropdown(shapeOptions, this._onShapeChange.bind(this)), "SHAPE");
+                // .appendField(new Blockly.FieldDropdown(shapeOptions, this._updateShape), "SHAPE");
 
 
             this.setInputsInline(false);

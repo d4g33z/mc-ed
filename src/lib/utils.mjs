@@ -82,7 +82,6 @@ export function defineMineCraftBlocklyUtils(Blockly) {
         }
     };
 
-
     Blockly.fieldRegistry.register('field_axis', Blockly.FieldAxis); // Use fieldRegistry
 
     MCED = {  // Export directly
@@ -96,6 +95,58 @@ export function defineMineCraftBlocklyUtils(Blockly) {
             get3dPickerShadow: () => '<shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow>',
             getStepperShadow: (defaultValue) => `<shadow type="math_number"><field name="NUM">${defaultValue}</field></shadow>`,
         }, Defaults: {values: {}}
+    };
+
+    // Now populate MCED.Defaults.values, as before
+    MCED.Defaults.values.minecraft_create_shape = {
+        FILLED: {default: "FALSE"},
+        SHAPE: {default: "CUBE"},
+        POSITION: {default: '{"x":0,"y":0,"z":0}', shadow: MCED.BlocklyUtils.get3dPickerShadow()},
+        TYPE: {default: "WOOD_PLANKS", shadow: '<shadow type="minecraft_block"></shadow>'},
+        RADIUS: {default: 3, shadow: MCED.BlocklyUtils.getStepperShadow(0)},
+        SIZE: {default: 3, shadow: MCED.BlocklyUtils.getStepperShadow(0)},
+        BASE: {default: 3, shadow: MCED.BlocklyUtils.getStepperShadow(0)}
+    };
+
+    MCED.Defaults.values.minecraft_create_door = {
+        POSITION: {
+            default: '{"x":0,"y":0,"z":0}', shadow: MCED.BlocklyUtils.get3dPickerShadow()
+        }, FACING: {default: "NORTH"}
+    };
+    MCED.Defaults.values.minecraft_set_block = {
+        TYPE: {
+            default: "WOOD_PLANKS", shadow: '<shadow type="minecraft_block"></shadow>'
+        }, POSITION: {default: '{"x":0,"y":0,"z":0}', shadow: MCED.BlocklyUtils.get3dPickerShadow()}
+    };
+    MCED.Defaults.values.minecraft_set_blocks = {
+        TYPE: {
+            default: "WOOD_PLANKS", shadow: '<shadow type="minecraft_block"></shadow>'
+        },
+        POSITION: {default: '{"x":0,"y":0,"z":0}', shadow: MCED.BlocklyUtils.get3dPickerShadow()},
+        SIZE: {default: '{"x":0,"y":0,"z":0}', shadow: MCED.BlocklyUtils.get3dPickerShadow()}
+    };
+    MCED.Defaults.values.minecraft_set_floor = {
+        TYPE: {
+            default: "WOOD_PLANKS", shadow: '<shadow type="minecraft_block"></shadow>'
+        }, SIZE: {default: 3, shadow: MCED.BlocklyUtils.getStepperShadow(3)}
+    };
+
+    MCED.Defaults.values.minecraft_create_column = {
+        FILLED: {default: "FALSE"},
+        POSITION: {default: '{"x":0,"y":0,"z":0}', shadow: MCED.BlocklyUtils.get3dPickerShadow()},
+        TYPE: {default: "WOOD_PLANKS", shadow: '<shadow type="minecraft_block"></shadow>'},
+        WIDTH: {default: 3, shadow: MCED.BlocklyUtils.getStepperShadow(3)},
+        HEIGHT: {default: 3, shadow: MCED.BlocklyUtils.getStepperShadow(3)},
+        AXIS: {default: "y"}
+    };
+    MCED.Defaults.values.minecraft_create_plane = {
+        POSITION: {
+            default: '{"x":0,"y":0,"z":0}', shadow: MCED.BlocklyUtils.get3dPickerShadow()
+        },
+        TYPE: {default: "WOOD_PLANKS", shadow: '<shadow type="minecraft_block"></shadow>'},
+        WIDTH: {default: 3, shadow: MCED.BlocklyUtils.getStepperShadow(3)},
+        HEIGHT: {default: 3, shadow: MCED.BlocklyUtils.getStepperShadow(3)},
+        AXIS: {default: "y"}
     };
 
 }
