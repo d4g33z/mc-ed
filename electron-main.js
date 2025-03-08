@@ -16,7 +16,7 @@ function createWindow() {
 
     // Load your blockly_editor.html file
     //mainWindow.loadFile(path.join(__dirname, 'src', 'blockly_editor.html'));
-    mainWindow.loadFile(path.join(__dirname, 'src', 'editor.html'));
+    mainWindow.loadFile(path.join(__dirname, 'dist', 'index.html'));
 
     // Open DevTools (for debugging - remove in production)
     mainWindow.webContents.openDevTools(); // Optional: Open developer tools on startup

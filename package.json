@@ -2,17 +2,41 @@
   "name": "mc-ed",
   "version": "1.0.0",
   "description": "Minecraft Blockly Editor",
-  "source": "src/editor.html",
+  "main": "electron-main.js",
+  "source": "src/index.html",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build"
+    "build": "parcel build",
+    "electron": "electron .",
+    "electron-build": "electron-builder"
   },
   "dependencies": {
     "blockly": "",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "electron": "^34.2.0",
-    "parcel": "^2.13.3"
+    "electron": "^25.0.0",
+    "electron-builder": "^24.9.1",
+    "parcel": "^2.9.3"
+  },
+  "build": {
+    "appId": "com.example.mced",
+    "productName": "MC-ED",
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "electron-main.js",
+      "dist/**/*"
+    ],
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   }
 }

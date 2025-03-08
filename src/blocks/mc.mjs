@@ -1,9 +1,13 @@
 console.log("mc.mjs: Start of file execution");
 
-import {MCED} from "../lib/utils.mjs"; //Importing here!
+import {MCED} from "../lib/constants.mjs"; //Importing here!
+// import {defineMineCraftBlocklyUtils} from "../lib/utils.mjs"
+
 
 export function defineMineCraftBlocks(Blockly) {
     console.log("mc.mjs: Inside defineMineCraftBlocks")
+
+    // defineMineCraftBlocklyUtils(Blockly);
 
     Blockly.Blocks['dummy_block'] = {
         init: function () {

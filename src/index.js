@@ -1,25 +1,20 @@
 import * as Blockly from 'blockly'; // import all of blockly
 
-console.log(Blockly)
-console.log('hello')
-
 // import { defineGreetingBlock } from './blocks/greeting.mjs'; // Import defineGreetingBlock
 // import { defineGreetingPython } from './generators/python/greeting.mjs'; // Import defineGreetingPython
 
+// import {defineMineCraftBlocklyUtils} from "./lib/utils.mjs";
 import {defineMineCraftConstants} from "./lib/constants.mjs";
-import {defineMineCraftBlocklyUtils} from "./lib/utils.mjs";
 import {defineMineCraftBlocks} from "./blocks/mc.mjs";
 import {defineMathBlocks} from "./blocks/math.mjs";
 
-import {MCED} from "./lib/utils.mjs"
-
-
 // defineGreetingBlock(Blockly)
 // defineGreetingPython(Blockly)
+
 async function init() {
 
+    // defineMineCraftBlocklyUtils(Blockly);
     defineMineCraftConstants(Blockly);
-    defineMineCraftBlocklyUtils(Blockly);
     defineMineCraftBlocks(Blockly)
     defineMathBlocks(Blockly);
 
