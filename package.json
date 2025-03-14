@@ -2,7 +2,7 @@
   "name": "mc-ed",
   "version": "1.0.0",
   "description": "Minecraft Blockly Editor",
-  "main": "src/javascript.js",
+  "main": "src/index.js",
   "source": "src/index.html",
   "scripts": {
     "start": "parcel",
