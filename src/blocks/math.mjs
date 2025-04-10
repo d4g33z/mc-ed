@@ -1,3 +1,4 @@
+// THIS MAY NOT BE NECESSARY
 console.log("math.mjs: Start of file execution");
 
 // import {MCED} from "../lib/utils.mjs"; //Importing here!
@@ -99,25 +100,28 @@ export function defineMathBlocks(Blockly) {
         }
     };
 
-    // Blockly.Blocks.unary = {
-    //     init: function () {
-    //         let t = {
-    //             id: "unary",
-    //             message0: "%1 %2 %3",
-    //             args0: [{
-    //                 type: "field_variable", name: "LEFT_HAND", variable: Blockly.Msg.VARIABLES_DEFAULT_NAME
-    //             }, {
-    //                 type: "field_dropdown",
-    //                 name: "OPERATOR",
-    //                 options: [["+=", "+="], ["-=", "-="], ["*=", "*="], ["/=", "/="]]
-    //             }, {type: "input_value", name: "RIGHT_HAND", check: "Number"}],
-    //             inputsInline: !0,
-    //             previousStatement: null,
-    //             nextStatement: null
-    //         };
-    //         this.jsonInit(t)
-    //     }
-    // };
+    Blockly.Blocks.math_unary = {
+        init: function () {
+            let t = {
+                id: "unary",
+                type: 'unary_dropdown',
+                message0: "%1 %2 %3",
+                args0: [
+                    { type: "field_variable", name: "LEFT_HAND", variable: Blockly.Msg.VARIABLES_DEFAULT_NAME},
+                    {
+                        type: "field_dropdown",
+                        name: "OPERATOR",
+                        options: [["+=", "+="], ["-=", "-="], ["*=", "*="], ["/=", "/="]]
+                    },
+                    { type: "input_value", name: "RIGHT_HAND", check: "Number"}
+                ],
+                inputsInline: !0,
+                previousStatement: null,
+                nextStatement: null
+            };
+            this.jsonInit(t)
+        }
+    };
 
     // Blockly.Blocks.math_arithmetic = {
     //     init: function () {

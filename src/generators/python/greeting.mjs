@@ -1,17 +1,11 @@
-/**
- * Python code generator for the 'greeting' block.
- * @param {Blockly.Block} block Block to generate Python code from.
- * @return {string} Python code or tuple of code and order of operations.
- */
 
-
-export function defineGreetingPython(Blockly) { // Export a function, take Blockly as arg
-    const pythonGeneratorGreeting = function(block) { // Export the generator function
+export function installGreetingGenerator(pythonGenerator) {
+    pythonGenerator.forBlock['greeting'] = function(block, generator) {
 
         console.log("python_generators.js: pythonGeneratorGreeting function called for block:", block); // Log when generator is called
 
         const nameValue = block.getFieldValue('NAME'); // Get value from NAME field
-        const messageValue = Blockly.Python.valueToCode(block, 'MESSAGE', Blockly.Python.ORDER_ATOMIC); // Get code from MESSAGE input
+        const messageValue = pythonGenerator.valueToCode(block, 'MESSAGE', pythonGenerator.ORDER_ATOMIC); // Get code from MESSAGE input
 
         console.log("python_generators.js: Extracted values - Name:", nameValue, ", Message Input Code:", messageValue); // Log extracted values
 
@@ -33,12 +27,4 @@ export function defineGreetingPython(Blockly) { // Export a function, take Block
     };
 
 
-    // console.log("greeting.js: defineGreetingBlock function called, Blockly =", Blockly); // Check Blockly object
-
-    console.log("greeting.js: Inside defineGreetingPython- About to define Blockly.Python.forBlock['greeting']");
-
-    Blockly.Python.forBlock['greeting'] = pythonGeneratorGreeting; // Register the generator with Blockly.Python
-
-    console.log("greeting.js: defineGreetingPython- Blockly.Python.forBlock['greeting'] definition COMPLETED");
-
-} // End of defineGreetingPython function
+}

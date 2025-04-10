@@ -1,23 +1,29 @@
 import * as Blockly from 'blockly'; // import all of blockly
+import { pythonGenerator } from 'blockly/python';
 
-// import { defineGreetingBlock } from './blocks/greeting.mjs'; // Import defineGreetingBlock
-// import { defineGreetingPython } from './generators/python/greeting.mjs'; // Import defineGreetingPython
+// test code
+import { defineGreetingBlock } from './blocks/greeting.mjs'; // Import defineGreetingPython
+import { installGreetingGenerator } from './generators/python/greeting.mjs'; // Import defineGreetingPython
 
-// import {defineMineCraftBlocklyUtils} from "./lib/utils.mjs";
+import {defineMineCraftBlocklyUtils} from "./lib/utils.mjs";
 import {defineMineCraftConstants} from "./lib/constants.mjs";
 import {defineMineCraftBlocks} from "./blocks/mc.mjs";
-import {defineMathBlocks} from "./blocks/math.mjs";
 
-// defineGreetingBlock(Blockly)
-// defineGreetingPython(Blockly)
+// we should have everything we need in predefined blocks
+// import {defineMathBlocks} from "./blocks/math.mjs";
+// import {installMathGenerators} from "./generators/python/math.mjs";
+
 
 async function init() {
 
-    // defineMineCraftBlocklyUtils(Blockly);
+    // defineMathBlocks(Blockly);
+
+    defineMineCraftBlocklyUtils(Blockly);
     defineMineCraftConstants(Blockly);
     defineMineCraftBlocks(Blockly)
-    defineMathBlocks(Blockly);
 
+    defineGreetingBlock(Blockly)
+    installGreetingGenerator(pythonGenerator);
 
     var workspace = Blockly.inject('blocklyDiv', {
         toolbox: document.getElementById('toolbox'),
@@ -60,7 +66,8 @@ async function init() {
     }
 
     window.generatePythonCode = function () {
-        var pythonCode = python.pythonGenerator.workspaceToCode(workspace);
+
+        var pythonCode = pythonGenerator.workspaceToCode(workspace);
         document.getElementById('pythonCodeDisplay').value = pythonCode; // Set textarea value
     }
 
