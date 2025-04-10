@@ -66,7 +66,7 @@ export function defineMineCraftBlocklyUtils(Blockly) {
     };
 
 
-    Blockly.fieldRegistry.register('field_colour', Blockly.FieldColour); // Use fieldRegistry
+    // Blockly.fieldRegistry.register('field_colour', Blockly.FieldColour); // Use fieldRegistry
 
     Blockly.FieldAxis = class extends Blockly.FieldDropdown {
         static fromJson(options) {
@@ -80,5 +80,5 @@ export function defineMineCraftBlocklyUtils(Blockly) {
         }
     };
 
-    Blockly.fieldRegistry.register('field_axis', Blockly.FieldAxis); // Use fieldRegistry
+    // Blockly.fieldRegistry.register('field_axis', Blockly.FieldAxis); // Use fieldRegistry
 }

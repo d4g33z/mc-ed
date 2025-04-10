@@ -16,7 +16,7 @@ export function defineMineCraftBlocks(Blockly) {
 
     };
 
-    // --- Position Category ---
+    // --- Position Category ---:/
 
     Blockly.Blocks['minecraft_vector_3d'] = {
         init: function () {
@@ -156,44 +156,6 @@ export function defineMineCraftBlocks(Blockly) {
         }
     };
 
-    Blockly.Blocks['minecraft_create_plane'] = {
-        init: function () {
-            this.setInputsInline(true);
-            this.setNextStatement(true);
-            this.setPreviousStatement(true);
-            this.setColour("#81c23c");
-
-            if (this.isInFlyout) {
-                this.appendDummyInput()
-                    .appendField(Blockly.Msg.MINECRAFT_PLANE);
-            } else {
-                this.appendValueInput("POSITION")
-                    .setCheck("3DVector")
-                    .appendField(Blockly.Msg.MINECRAFT_PLANE)
-                    .setAlign(Blockly.ALIGN_RIGHT);
-                this.appendValueInput("WIDTH")
-                    .setCheck("Number")
-                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_WIDTH)  //Correct Use
-                    .setAlign(Blockly.ALIGN_RIGHT);
-                this.appendValueInput("HEIGHT")
-                    .setCheck("Number")
-                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_HEIGHT) //Correct Use
-                    .setAlign(Blockly.ALIGN_RIGHT);
-                this.appendValueInput("TYPE")
-                    .setCheck("Block")
-                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_TYPE) //Correct Use
-                    .setAlign(Blockly.ALIGN_RIGHT);
-                this.appendDummyInput()
-                    .appendField(new Blockly.FieldAxis("y", ["y", "x", "z"]), "AXIS")
-                    .setAlign(Blockly.ALIGN_RIGHT);
-
-                MCED.BlocklyUtils.configureShadow(this, "POSITION");
-                MCED.BlocklyUtils.configureShadow(this, "WIDTH");
-                MCED.BlocklyUtils.configureShadow(this, "HEIGHT");
-                MCED.BlocklyUtils.configureShadow(this, "TYPE");
-            }
-        }
-    };
     Blockly.Blocks['minecraft_create_shape'] = {
         init: function () {
             const shapeOptions = [[Blockly.Msg.MINECRAFT_SHAPE_CUBE, "CUBE"], [Blockly.Msg.MINECRAFT_SHAPE_SPHERE, "SPHERE"], [Blockly.Msg.MINECRAFT_SHAPE_PYRAMID, "PYRAMID"]];
@@ -322,6 +284,45 @@ export function defineMineCraftBlocks(Blockly) {
                 }
             }
         },
+    };
+
+    Blockly.Blocks['minecraft_create_plane'] = {
+        init: function () {
+            this.setInputsInline(true);
+            this.setNextStatement(true);
+            this.setPreviousStatement(true);
+            this.setColour("#81c23c");
+
+            if (this.isInFlyout) {
+                this.appendDummyInput()
+                    .appendField(Blockly.Msg.MINECRAFT_PLANE);
+            } else {
+                this.appendValueInput("POSITION")
+                    .setCheck("3DVector")
+                    .appendField(Blockly.Msg.MINECRAFT_PLANE)
+                    .setAlign(Blockly.ALIGN_RIGHT);
+                this.appendValueInput("WIDTH")
+                    .setCheck("Number")
+                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_WIDTH)  //Correct Use
+                    .setAlign(Blockly.ALIGN_RIGHT);
+                this.appendValueInput("HEIGHT")
+                    .setCheck("Number")
+                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_HEIGHT) //Correct Use
+                    .setAlign(Blockly.ALIGN_RIGHT);
+                this.appendValueInput("TYPE")
+                    .setCheck("Block")
+                    .appendField(Blockly.Msg.MINECRAFT_COLUMN_TYPE) //Correct Use
+                    .setAlign(Blockly.ALIGN_RIGHT);
+                this.appendDummyInput()
+                    .appendField(new Blockly.FieldAxis("y", ["y", "x", "z"]), "AXIS")
+                    .setAlign(Blockly.ALIGN_RIGHT);
+
+                MCED.BlocklyUtils.configureShadow(this, "POSITION");
+                MCED.BlocklyUtils.configureShadow(this, "WIDTH");
+                MCED.BlocklyUtils.configureShadow(this, "HEIGHT");
+                MCED.BlocklyUtils.configureShadow(this, "TYPE");
+            }
+        }
     };
 
     // --- Blocks Category ---

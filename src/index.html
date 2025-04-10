@@ -11,142 +11,174 @@
 <body>
     <div id="blocklyDiv" style="height: 800px; width: 100%;"></div>
     <xml id="toolbox" style="display: none">
-        <category name="Craft" colour="#81c23c">
-            <block type="minecraft_create_column">
-                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>
-                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>
-                <value name="WIDTH"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
-                <value name="HEIGHT"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
-            </block>
-            <block type="minecraft_create_shape">
-                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>
-                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>
-                <value name="SIZE"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
-                <value name="RADIUS"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
-                <value name="BASE"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
-            </block>
-            <block type="minecraft_create_plane">
-                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>
-                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>
-                <value name="WIDTH"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
-                <value name="HEIGHT"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
-            </block>
-<!--            <block type="minecraft_set_block">-->
-<!--                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>-->
-<!--                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>-->
-<!--            </block>-->
-<!--            <block type="minecraft_set_blocks">-->
-<!--                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>-->
-<!--                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>-->
-<!--            </block>-->
-<!--            <block type="minecraft_set_floor">-->
-<!--                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>-->
-<!--                <value name="SIZE"><shadow type="math_number"><field name="NUM">3</field></shadow></value>-->
-<!--            </block>-->
-<!--            <block type="minecraft_create_door">-->
-<!--                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>-->
-            </block>
-        </category>
-        <category colour="#0099CC" name="Position">
-            <block type="minecraft_vector_3d">
-                <value name="X">
-                    <shadow type="math_number">
-                        <field name="NUM">0</field>
-                    </shadow>
-                </value>
-                <value name="Y">
-                    <shadow type="math_number">
-                        <field name="NUM">0</field>
-                    </shadow>
-                </value>
-                <value name="Z">
-                    <shadow type="math_number">
-                        <field name="NUM">0</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="minecraft_vector_delta">
-                <value name="X">
-                    <shadow type="math_number">
-                        <field name="NUM">0</field>
-                    </shadow>
-                </value>
-                <value name="Y">
-                    <shadow type="math_number">
-                        <field name="NUM">0</field>
-                    </shadow>
-                </value>
-                <value name="Z">
-                    <shadow type="math_number">
-                        <field name="NUM">0</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="minecraft_position_player"></block>
-            <block type="minecraft_position_entity">
-                <value name="ENTITY">
-                    <shadow type="minecraft_entity_entity"></shadow>
-                </value>
-            </block>
-            <block type="minecraft_position_get_direction"></block>
-            <block type="minecraft_position_look_at">
-                <value name="TARGET">
-                    <shadow type="minecraft_vector_3d">
-                        <field name="X">0</field>
-                        <field name="Y">0</field>
-                        <field name="Z">0</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="minecraft_position_here"></block>
-        </category>
-        <category colour="#A0A0A0" name="Blocks">
-            <block type="minecraft_block_world"></block>
-            <block type="minecraft_block_material"></block>
-            <block type="minecraft_block_block"></block>
-            <block type="minecraft_block_lamp"></block>
-            <block type="minecraft_block_glass"></block>
-            <block type="minecraft_block_wool"></block>
-            <block type="minecraft_block_clay"></block>
-            <block type="minecraft_block_stairs"></block>
-            <block type="minecraft_block_slab"></block>
-            <block type="minecraft_block_fence"></block>
-            <block type="minecraft_block_door"></block>
-            <block type="minecraft_block_trapdoor"></block>
-            <block type="minecraft_block_liquid"></block>
-            <block type="minecraft_block_falling"></block>
-            <block type="minecraft_block_redstone"></block>
-            <block type="minecraft_block_button"></block>
-            <block type="minecraft_block_lever"></block>
-            <block type="minecraft_block_pressure_plate"></block>
-            <block type="minecraft_block_rail"></block>
-        </category>
-<!--        <category name="Custom Python Blocks" color="160">-->
-<!--            <block type="greeting"></block>-->
-<!--        </category>-->
-        <category colour="#A0A0A0" name="Math">
-            <block type="math_min_max"></block>
-<!--            <block type="math_max"></block>-->
-            <block type="math_sign"></block>
-            <block type="math_random"></block>
-            <block type="math_lerp"></block>
-<!--            <block type="math_unary"></block>-->
+        <category colour="#81c23c" name="Minecraft">
+            <category name="Craft" colour="#81c23c">
+                <block type="minecraft_create_column">
+                    <value name="TYPE"><shadow type="minecraft_block"></shadow></value>
+                    <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>
+                    <value name="WIDTH"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+                    <value name="HEIGHT"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+                </block>
+                <block type="minecraft_create_shape">
+                    <value name="TYPE"><shadow type="minecraft_block"></shadow></value>
+                    <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>
+                    <value name="SIZE"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+                    <value name="RADIUS"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+                    <value name="BASE"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+                </block>
+                <block type="minecraft_create_plane">
+                    <value name="TYPE"><shadow type="minecraft_block"></shadow></value>
+                    <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>
+                    <value name="WIDTH"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+                    <value name="HEIGHT"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+                </block>
+    <!--            <block type="minecraft_set_block">-->
+    <!--                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>-->
+    <!--                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>-->
+    <!--            </block>-->
+    <!--            <block type="minecraft_set_blocks">-->
+    <!--                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>-->
+    <!--                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>-->
+    <!--            </block>-->
+    <!--            <block type="minecraft_set_floor">-->
+    <!--                <value name="TYPE"><shadow type="minecraft_block"></shadow></value>-->
+    <!--                <value name="SIZE"><shadow type="math_number"><field name="NUM">3</field></shadow></value>-->
+    <!--            </block>-->
+    <!--            <block type="minecraft_create_door">-->
+    <!--                <value name="POSITION"><shadow type="minecraft_vector_3d"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Z"><shadow type="math_number"><field name="NUM">0</field></shadow></value></shadow></value>-->
+                </block>
+            </category>
+            <category colour="#0099CC" name="Position">
+                <block type="minecraft_vector_3d">
+                    <value name="X">
+                        <shadow type="math_number">
+                            <field name="NUM">0</field>
+                        </shadow>
+                    </value>
+                    <value name="Y">
+                        <shadow type="math_number">
+                            <field name="NUM">0</field>
+                        </shadow>
+                    </value>
+                    <value name="Z">
+                        <shadow type="math_number">
+                            <field name="NUM">0</field>
+                        </shadow>
+                    </value>
+                </block>
+                <block type="minecraft_vector_delta">
+                    <value name="X">
+                        <shadow type="math_number">
+                            <field name="NUM">0</field>
+                        </shadow>
+                    </value>
+                    <value name="Y">
+                        <shadow type="math_number">
+                            <field name="NUM">0</field>
+                        </shadow>
+                    </value>
+                    <value name="Z">
+                        <shadow type="math_number">
+                            <field name="NUM">0</field>
+                        </shadow>
+                    </value>
+                </block>
+                <block type="minecraft_position_player"></block>
+                <block type="minecraft_position_entity">
+                    <value name="ENTITY">
+                        <shadow type="minecraft_entity_entity"></shadow>
+                    </value>
+                </block>
+                <block type="minecraft_position_get_direction"></block>
+                <block type="minecraft_position_look_at">
+                    <value name="TARGET">
+                        <shadow type="minecraft_vector_3d">
+                            <field name="X">0</field>
+                            <field name="Y">0</field>
+                            <field name="Z">0</field>
+                        </shadow>
+                    </value>
+                </block>
+                <block type="minecraft_position_here"></block>
+            </category>
+            <category colour="#A0A0A0" name="Blocks">
+                <block type="minecraft_block_world"></block>
+                <block type="minecraft_block_material"></block>
+                <block type="minecraft_block_block"></block>
+                <block type="minecraft_block_lamp"></block>
+                <block type="minecraft_block_glass"></block>
+                <block type="minecraft_block_wool"></block>
+                <block type="minecraft_block_clay"></block>
+                <block type="minecraft_block_stairs"></block>
+                <block type="minecraft_block_slab"></block>
+                <block type="minecraft_block_fence"></block>
+                <block type="minecraft_block_door"></block>
+                <block type="minecraft_block_trapdoor"></block>
+                <block type="minecraft_block_liquid"></block>
+                <block type="minecraft_block_falling"></block>
+                <block type="minecraft_block_redstone"></block>
+                <block type="minecraft_block_button"></block>
+                <block type="minecraft_block_lever"></block>
+                <block type="minecraft_block_pressure_plate"></block>
+                <block type="minecraft_block_rail"></block>
+            </category>
         </category>
 
-        <category colour="#A0A0A0" name="Variables">
+        <category colour="#EC7207" name="Math">
             <block type="math_number"></block>
+            <block type="math_arithmetic"></block>
+            <block type="math_single"></block>
+            <block type="math_trig"></block>
+            <block type="math_constant"></block>
+            <block type="math_number_property"></block>
+            <block type="math_round"></block>
+            <block type="math_modulo"></block>
+            <block type="math_random_int"></block>
+            <block type="math_random_float"></block>
+            <block type="math_atan2"></block>
+<!--            <block type="math_pow"></block>-->
+<!--            <block type="math_unary"></block>-->
+        </category>
+        <category name="Strings">
             <block type="text"></block>
             <block type="text_join"></block>
+            <block type="text_length"></block>
+        </category>
+        <category colour="#A0A0A0" name="Variables">
+            <block type="math_number"></block>
             <block type="variables_set"></block>
             <block type="variables_get"></block>
         </category>
-
-        <category  colour="#A0A0A0" name="Python">
-            <block type="math_arithmetic"></block>
+        <category name="Lists">
+            <block type="lists_create_empty"></block>
+            <block type="list_create_with"></block>
+        </category>
+        <category name="Colour">
+            <block type="colour_picker"></block>
+        </category>
+        <category  colour="#A0A0A0" name="Control">
             <block type="controls_if"></block>
-            <block type="logic_compare"></block>
+            <block type="controls_whileUntil"></block>
             <block type="controls_repeat_ext"></block>
-            <block type="text_print"></block>
+            <block type="controls_forEach"></block>
+        </category>
+
+        <category  colour="#A0A0A0" name="Logic">
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_ternary"></block>
+            <block type="logic_negate"></block>
+            <block type="logic_boolean"></block>
+
+        </category>
+
+        <category colour="#A0A0A0" name="functions">
+            <block type="procedures_defnoreturn"></block>
+            <block type="procedures_defreturn"></block>
+        </category>
+
+        <category name="Test" color="160">
+            <block type="greeting"></block>
         </category>
     </xml>
 
